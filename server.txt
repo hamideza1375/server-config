@@ -1,12 +1,12 @@
 parsed.com
 #StartConfig
-ssh -p 2233 root@162.19.217.1 qwkJbthQfdyFJzv New password hamid1375
+ssh -p 2233 reza@162.19.217.1
 passwd 'newpasword'
 apt update
 apt upgrade
 reboot = 'restart server'
-adduser hamid
-adduser hamid sudo
+adduser reza
+adduser reza sudo
 nano /etc/ssh/sshd_config 'change Port && PermitRootLogin no'
 service sshd restart
 
@@ -25,6 +25,7 @@ sudo ufw allow ssh ='allow port 22'
 sudo ufw allow 2233
 sudo ufw allow http
 sudo ufw allow https
+sudo uff allow ftp = 'allow port 21'
 sudo ufw status
 sudo apt install sshguard
 
@@ -51,6 +52,11 @@ sudo ufw allow 27017 'اگه از دیتا بیس خارج از سیستم اس�
 
 
 
+#ftp sftp
+brew install sftp
+echo put salam.txt | sftp -P 2233 reza@162.19.217.1
+
+
 
 
 #pm2
@@ -63,8 +69,8 @@ pm2 delete 0
 pm2 logs
 pm2 flush
 pm2 monit
-pm2 start npm --name "app name" -- start
-pm2 startup && sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u hamid --hp /home/hamid
+pm2 start app.js -n helloworld
+pm2 startup && sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u reza --hp /home/reza
 pm2 startup = 'auto boot'
 pm2 save
 pm2 unstartup systemd
@@ -77,9 +83,10 @@ pm2 unstartup systemd
 #nginx
 sudo apt install nginx
 service nginx status
-sudo vim /etc/nginx/site-available/default
 
-root /var/www/html
+cd /var/www/html && nano index.nginx-debian.html = 'فایل اچ تی ام ال ان جین ایکس که با سرچ کردن ادرس ای پی در مرورگر این صفحه نمایش داده میشه'
+
+sudo nano /etc/nginx/sites-available/default
 
 # Add index.php to the list if you are using php
 index	index.html	index.htm	index.nginx-debian.html
@@ -89,7 +96,7 @@ server_name _;
 location / {
 	# First attempt to serve request as file, then
 	# as directory, then fallback to displaying a 404
-	proxy_pass http://localhost:3000; #whatever port your app runs on
+	proxy_pass http://localhost:3000;
 	proxy_http_version 1.1;
 	proxy_set_header Upgrade $http_upgrade;
 	proxy_set_header Connection 'upgrade';
