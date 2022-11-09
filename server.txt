@@ -1,0 +1,101 @@
+parsed.com
+#StartConfig
+ssh -p 2233 root@162.19.217.1 qwkJbthQfdyFJzv New password hamid1375
+passwd 'newpasword'
+apt update
+apt upgrade
+reboot = 'restart server'
+adduser hamid
+adduser hamid sudo
+nano /etc/ssh/sshd_config 'change Port && PermitRootLogin no'
+service sshd restart
+
+
+
+
+#Firwale
+sudo hostnamectl set-hostname 'newhostname'
+sudo nano /etc/hosts && 'edit 127.0.1.1 VMID-5084.nrp.co VMID-5084 to newHostName newHostName'
+sudo reboot
+sudo apt install ufw
+sudo ufw enable
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow ssh ='allow port 22'
+sudo ufw allow 2233
+sudo ufw allow http
+sudo ufw allow https
+sudo ufw status
+sudo apt install sshguard
+
+
+
+
+#Node
+Go to = https://github.com/nodesource/distributions/blob/master/README.md
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash - &&\
+sudo apt-get install -y nodejs  '= node.js 18 for ubuntu'
+
+
+
+
+
+#MongoDB
+sudo apt install mongodb
+sudo service mongodb status
+sudo service mongodb start
+sudo service mongodb stop
+sudo service mongodb restart
+mongod -v
+sudo ufw allow 27017 'اگه از دیتا بیس خارج از سیستم استفاده کردین باید پورت ۲۷۰۱۷ که برای مونگو دیبی هست رو باز'
+
+
+
+
+
+#pm2
+sudo npm i -g pm2
+pm2 start app.js
+pm2 status
+pm2 restart id
+pm2 stop 1
+pm2 delete 0
+pm2 logs
+pm2 flush
+pm2 monit
+pm2 start npm --name "app name" -- start
+pm2 startup && sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u hamid --hp /home/hamid
+pm2 startup = 'auto boot'
+pm2 save
+pm2 unstartup systemd
+
+
+
+
+
+
+#nginx
+sudo apt install nginx
+service nginx status
+sudo vim /etc/nginx/site-available/default
+
+root /var/www/html
+
+# Add index.php to the list if you are using php
+index	index.html	index.htm	index.nginx-debian.html
+
+server_name _;
+
+location / {
+	# First attempt to serve request as file, then
+	# as directory, then fallback to displaying a 404
+	proxy_pass http://localhost:3000; #whatever port your app runs on
+	proxy_http_version 1.1;
+	proxy_set_header Upgrade $http_upgrade;
+	proxy_set_header Connection 'upgrade';
+	proxy_set_header Host $host;
+	proxy_cache_bypass $http_upgrade;
+}
+
+sudo nginx -t
+sudo service nginx restart
