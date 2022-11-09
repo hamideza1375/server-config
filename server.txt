@@ -1,15 +1,15 @@
 parsed.com
 #StartConfig
-ssh -p 2233 reza@162.19.217.1
+ssh -p 2233 root@162.19.217.1
 passwd 'newpasword'
 apt update
 apt upgrade
 reboot = 'restart server'
-adduser reza
-adduser reza sudo
+adduser newUser
+adduser newUser sudo
 nano /etc/ssh/sshd_config 'change Port && PermitRootLogin no'
 service sshd restart
-
+sudo service sshd restart
 
 
 
@@ -19,7 +19,8 @@ sudo nano /etc/hosts && 'edit 127.0.1.1 VMID-5084.nrp.co VMID-5084 to newHostNam
 sudo reboot
 sudo apt install ufw
 sudo ufw enable
-sudo ufw default deny incoming
+sudo ufw default deny 21
+sudo ufw default allow 21
 sudo ufw default allow outgoing
 sudo ufw allow ssh ='allow port 22'
 sudo ufw allow 2233
@@ -52,14 +53,14 @@ sudo ufw allow 27017 'اگه از دیتا بیس خارج از سیستم اس�
 
 
 
-#ftp sftp
+#FTP SFTP
 brew install sftp
-echo put salam.txt | sftp -P 2233 reza@162.19.217.1
+echo put salam.txt | sftp -P 2233 root@162.19.217.1
+echo mput index.html salam.txt | sftp -P 2233 hamid@162.19.217.1 'change name index.html to salam.txt and upload'
 
 
 
-
-#pm2
+#Pm2
 sudo npm i -g pm2
 pm2 start app.js
 pm2 status
@@ -70,7 +71,7 @@ pm2 logs
 pm2 flush
 pm2 monit
 pm2 start app.js -n helloworld
-pm2 startup && sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u reza --hp /home/reza
+pm2 startup && sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u (userName) --hp /home/(userName)
 pm2 startup = 'auto boot'
 pm2 save
 pm2 unstartup systemd
@@ -80,7 +81,7 @@ pm2 unstartup systemd
 
 
 
-#nginx
+#Nginx
 sudo apt install nginx
 service nginx status
 
