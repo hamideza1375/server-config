@@ -54,9 +54,23 @@ sudo ufw allow 27017 'اگه از دیتا بیس خارج از سیستم اس�
 
 
 #FTP SFTP
+Go to seeing > sharing and enable file sharing and remote login
 brew install sftp
-echo put salam.txt | sftp -P 2233 root@162.19.217.1
-echo mput index.html salam.txt | sftp -P 2233 hamid@162.19.217.1 'change name index.html to salam.txt and upload'
+sftp -P 2233 root@162.19.217.1
+put a.txt
+put -r a.txt 'upload folder as local to remote'
+get a.txt = 'send file in remote to local'
+rm a.txt = ''
+
+Pwd = 'remote'
+lpwd = 'local'
+ls = 'remote'
+lls = 'local'
+
+echo put filename | sftp -P 2233 root@162.19.217.1
+echo put -r foldername | sftp -P 2233 root@162.19.217.1
+echo delete -r js_project2 | sftp -P 2233 rootd@162.19.217.1
+echo mput index.html salam.txt | sftp -P 2233 root@162.19.217.1 'change name index.html to salam.txt and upload'
 
 
 
