@@ -55,7 +55,8 @@ sudo ufw allow 27017 'اگه از دیتا بیس خارج از سیستم اس�
 
 #FTP SFTP
 Go to seeing > sharing and enable file sharing and remote login
-brew install sftp
+brew install tnftp 'اگه لازم شد این پکیج و پکیج زیر رو نصب کن'
+brew install sftp 'شاید پکیجی با این نام وجو نداشته باشد'
 sftp -P 2233 root@162.19.217.1
 put a.txt
 put -r a.txt 'upload folder as local to remote'
@@ -66,6 +67,8 @@ Pwd = 'remote'
 lpwd = 'local'
 ls = 'remote'
 lls = 'local'
+cd
+lcd
 
 echo put filename | sftp -P 2233 root@162.19.217.1
 echo put -r foldername | sftp -P 2233 root@162.19.217.1
@@ -100,6 +103,15 @@ sudo apt install nginx
 service nginx status
 
 cd /var/www/html && nano index.nginx-debian.html = 'فایل اچ تی ام ال ان جین ایکس که با سرچ کردن ادرس ای پی در مرورگر این صفحه نمایش داده میشه'
+
+
+/var/www/html 'برای ریکت فقط کافی هست که فایل پروزه خروجی گرفته شده رو توی این مسیر قرار بدی
+قبلش فایل 
+index.nginx-debian.html
+رو از این مسیر پاک کن
+'
+
+
 
 sudo nano /etc/nginx/sites-available/default
 
