@@ -13,7 +13,7 @@ sudo service sshd restart
 
 
 
-#Firwale
+#Firewall
 sudo hostnamectl set-hostname 'newhostname'
 sudo nano /etc/hosts && 'edit 127.0.1.1 VMID-5084.nrp.co VMID-5084 to newHostName newHostName'
 sudo reboot
@@ -102,25 +102,50 @@ pm2 unstartup systemd
 #Nginx
 sudo apt install nginx
 service nginx status
-
-cd /var/www/html && nano index.nginx-debian.html = 'فایل اچ تی ام ال ان جین ایکس که با سرچ کردن ادرس ای پی در مرورگر این صفحه نمایش داده میشه'
-
-
-/var/www/html 'برای ریکت فقط کافی هست که فایل پروزه خروجی گرفته شده رو توی این مسیر قرار بدی
-قبلش فایل 
-index.nginx-debian.html
-رو از این مسیر پاک کن
-'
-
-
-
+/var/www/html =
+'برای ریکت فقط کافی هست که فایل پروزه خروجی گرفته شده رو توی این مسیر قرار بدیقبلش فایل index.nginx-debian.htmlرو از این مسیر پاک کن
 sudo nano /etc/nginx/sites-available/default
+location / { try_files $uri /index.html; }
+sudo nginx -t
+sudo service nginx restart
+Only set folder root in /var/www/*
 
-# Add index.php to the list if you are using php
-index	index.html	index.htm	index.nginx-debian.html
 
-server_name _;
 
+
+#Nginx-Multi-Domin
+sudo mkdir -p /var/www/mytest1.com/public_html
+sudo chmod 777 /var/www/mytest1.com/public_html
+sudo echo "Welcome to mytest1.com!" > /var/www/mytest1.com/public_html/index.html
+sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/mytest1.com
+Edit /etc/nginx/sites-available/mytest1.com  = "
+root /var/www/mytest1.com/public_html
+server_name mytest1.com www.mytest1.com;"
+sudo service nginx restart
+
+
+
+#Nginx-create-Domin2
+sudo mkdir -p /var/www/mytest2.com/public_html
+sudo chmod 777 /var/www/mytest2.com/public_html
+sudo echo "Welcome to mytest1.com!" > /var/www/mytest2.com/public_html/index.html
+sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/mytest2.com
+sudo nano /etc/nginx/sites-available/mytest2.com =
+Edit
+ listen 80 default_server;
+  listen [::]:80 default_server;
+To
+ listen 80;
+  listen [::]:80;
+&&
+server_name mytest2.com www.mytest2.com;"
+sudo service nginx restart
+
+
+
+
+
+#Nginx-Set-Nod
 location / {
 	# First attempt to serve request as file, then
 	# as directory, then fallback to displaying a 404
@@ -130,20 +155,26 @@ location / {
 	proxy_set_header Connection 'upgrade';
 	proxy_set_header Host $host;
 	proxy_cache_bypass $http_upgrade;
-
-        try_files $uri /index.html;
-        Or
-        try_files $uri $uri/ /index.html?/$request_uri; 
-        Or
-        try_files $uri $uri/ /index.html
 }
 
-sudo nginx -t
-sudo service nginx restart
-'روت رو باید تو 
-/var/www
-قراربدی'
 
+
+
+
+#
+ Original = try_files $uri /index.html;
+ Or
+ try_files $uri $uri/ /index.html?/$request_uri; 
+ Or
+ try_files $uri $uri/ /index.html
+
+
+
+
+
+#GetDomin
+برای دریافت دامنه ابتدا باید در سایت ایرلینک ثبت نام کنید و شناسه ی ایرلینک را دریافت کنید و مدیریت رابط های مجاز را روی گزینه ی خودم و
+ نمایندگان قراردهید
 
 
 
@@ -203,7 +234,6 @@ server {
     allow all;
   }
 }
-
 
 
 
