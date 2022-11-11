@@ -141,6 +141,21 @@ To
 server_name mytest2.com www.mytest2.com;"
 sudo service nginx restart
 
+(symbolic Link)
+در این مرحله یک لینک نمادین از دایرکتوری sites-available در دایرکتوری sites-enabled ایجاد خواهیم نمود که عملا وب سرور Nginx آن را فراخوانی می نماید:
+
+sudo ln -s /etc/nginx/sites-available/mytest1.com /etc/nginx/sites-enabled/
+
+sudo ln -s /etc/nginx/sites-available/mytest2.com /etc/nginx/sites-enabled/
+حالا لینک نمادین را از سروربلاک اصلی می بایست حذف نماییم:
+
+sudo rm /etc/nginx/sites-enabled/default
+حالا Nginx را ریست می کنیم:
+
+
+
+
+
 
 
 
