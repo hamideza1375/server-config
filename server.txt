@@ -1,4 +1,10 @@
 parsed.com
+
+#install pip
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+Right click in file and select Python rancher 3
+
+
 #StartConfig
 ssh -p 2233 root@162.19.217.1
 passwd 'newpasword'
@@ -10,6 +16,14 @@ adduser newUser sudo
 nano /etc/ssh/sshd_config 'change Port && PermitRootLogin no'
 service sshd restart
 sudo service sshd restart
+
+
+
+
+#live connection
+screen
+
+
 
 
 
@@ -58,7 +72,7 @@ Go to seeing > sharing and enable file sharing and remote login
 brew install tnftp 'اگه لازم شد این پکیج و پکیج زیر رو نصب کن'
 brew install sftp 'شاید پکیجی با این نام وجو نداشته باشد'
 sftp -P 2233 root@162.19.217.1
-sftp -P 2233 hamid@162.19.217.1:/home
+sftp -P 2233 root@162.19.217.1:/home
 put a.txt
 put -r a.txt 'upload folder as local to remote'
 get a.txt = 'send file in remote to local'
