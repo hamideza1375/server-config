@@ -20,12 +20,20 @@ sudo service sshd restart
 
 
 
-#live connection
-screen
+#live-connection
+watch -n 100 date
 
 
+#watch-login
+W
+
+#Set-Date
+date +"%19:55:04"
+date +"%00-%30-%00"
 
 
+#.bashrc
+sudo nano ~/.bashrc
 
 #Firewall
 sudo hostnamectl set-hostname 'newhostname'
